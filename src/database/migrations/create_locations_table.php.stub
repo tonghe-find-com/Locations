@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateLocationTable extends Migration
+class CreateLocationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,44 +12,19 @@ class CreateLocationTable extends Migration
      */
     public function up()
     {
-        Schema::create('casecategories', function (Blueprint $table) {
+        Schema::create('locations', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('image_id')->unsigned()->nullable();
             $table->json('status');
             $table->json('title');
-            $table->json('body');
-             //排序
+            $table->json('area');
+            $table->json('phone');
+            $table->json('address');
+            $table->json('address_link');
+            $table->json('email');
             $table->integer('position')->unsigned()->default(0);
-            //meta
-            $table->json('slug');
-            $table->json('meta_title');
-            $table->json('meta_keywords');
-            $table->json('meta_description');
-            $table->timestamps();
-        });
-        Schema::create('cases', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('id');
-            $table->integer('image_id')->unsigned()->nullable();
-            $table->json('status');
-            $table->json('title');
-            $table->json('sub_title');
-            $table->json('summary');
-            $table->json('body');
-            $table->json('tag1');
-            $table->json('tag2');
-            $table->text('area');
-            //類別id
-            $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('casecategories');
-            //排序
-            $table->integer('position')->unsigned()->default(0);
-            //meta
-            $table->json('slug');
-            $table->json('meta_title');
-            $table->json('meta_keywords');
-            $table->json('meta_description');
+            $table->json('show_homepage');
             $table->timestamps();
         });
     }
@@ -62,7 +36,6 @@ class CreateLocationTable extends Migration
      */
     public function down()
     {
-        Schema::drop('cases');
-        Schema::drop('casecategories');
+        Schema::drop('locations');
     }
 }
